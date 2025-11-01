@@ -48,19 +48,6 @@
 
 ---
 
-## 🧩 Model Details
-
-The **Points Predictor** uses a `RandomForestRegressor` trained on historical FPL data.
-**Features used:**
-
-- Minutes, Goals, Assists, Clean Sheets, Yellow Cards
-- Saves, Expected Goals (xG), Expected Assists (xA), Expected Goals Conceded (xGC)
-- Fixture Difficulty
-
-**Target:** Total FPL points for the upcoming fixture.
-
----
-
 ## 📊 Future Plans
 
 - 🧩 Add captaincy and transfer recommendations
