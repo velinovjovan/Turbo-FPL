@@ -21,6 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta
+          name="google-site-verification"
+          content="B_3g9Ie1OKyPo9ykh2SyuF9XOIVHuP6N4jmkC9NkpUM"
+        ></meta>
         <link
           rel="icon"
           type="image/x-icon"
