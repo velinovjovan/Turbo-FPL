@@ -38,15 +38,7 @@
    npm install
    ```
 
-3. **Set up environment variables**
-   Create a `.env.local` file and add:
-
-   ```bash
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
-   ```
-
-4. **Run the development server**
+3. **Run the development server**
 
    ```bash
    npm run dev
