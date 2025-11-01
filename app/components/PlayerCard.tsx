@@ -28,6 +28,8 @@ const PlayerCard = ({
 
   const isCaptain = multiplier > 1;
 
+  console.log(photo, name);
+
   return (
     <div className="group relative">
       <div
@@ -59,7 +61,7 @@ const PlayerCard = ({
             width={77}
             height={98}
             alt={`${name}`}
-            src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${photo.slice(
+            src={`https://resources.premierleague.com/premierleague25/photos/players/110x140/${photo.slice(
               0,
               -3
             )}png`}

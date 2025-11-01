@@ -246,7 +246,7 @@ const TablePredict = ({
                                   width={77}
                                   height={98}
                                   alt={`${player.web_name} photo`}
-                                  src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.slice(
+                                  src={`https://resources.premierleague.com/premierleague25/photos/players/110x140/${player.photo.slice(
                                     0,
                                     -3
                                   )}png`}
