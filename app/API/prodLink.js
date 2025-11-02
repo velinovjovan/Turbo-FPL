@@ -1,1 +1,2 @@
-export const prodLink = "https://fantasy.premierleague.com";
+export const prodLink =
+  "https://corsproxy.io/?https://fantasy.premierleague.com";
