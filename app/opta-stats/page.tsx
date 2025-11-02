@@ -2,6 +2,10 @@
 import React, { useState, useEffect } from "react";
 import TableOpta from "../components/TableOpta";
 import ErrorScreen from "../components/ErrorScreen";
+import { devLink } from "../API/devLink";
+import { prodLink } from "../API/prodLink";
+
+const baseLink = process.env.NODE_ENV === "development" ? devLink : prodLink;
 
 const OptaStats = () => {
   const [data, setData] = useState({
@@ -34,7 +38,7 @@ const OptaStats = () => {
       try {
         const timeStamp = new Date().getTime();
         const response = await fetch(
-          `https://corsproxy.io/?https://fantasy.premierleague.com/api/bootstrap-static/?_=${timeStamp}`
+          `${baseLink}/api/bootstrap-static/?_=${timeStamp}`
         );
 
         if (!response.ok) {

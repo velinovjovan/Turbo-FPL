@@ -4,13 +4,15 @@ import ErrorScreen from "@/app/components/ErrorScreen";
 import PlayerCard from "@/app/components/PlayerCard";
 import { notFound } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { devLink } from "../../API/devLink";
+import { prodLink } from "../../API/prodLink";
+
+const baseLink = process.env.NODE_ENV === "development" ? devLink : prodLink;
 
 const TeamView = ({ params }: { params: { id: string } }) => {
   const TeamId = params.id;
 
-  if (Number(TeamId) > 12360377 || Number(TeamId) < 1) {
-    notFound();
-  }
+  if (Number(TeamId) > 12360377 || Number(TeamId) < 1) notFound();
 
   const [data, setData] = useState({
     name: "",
@@ -77,7 +79,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
       try {
         const timeStamp = new Date().getTime();
         const response = await fetch(
-          `https://corsproxy.io/?https://fantasy.premierleague.com/api/bootstrap-static/?_=${timeStamp}`
+          `${baseLink}/api/bootstrap-static/?_=${timeStamp}`
         );
 
         if (!response.ok) {
@@ -101,7 +103,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
         setIsLoading(true);
         const timeStamp = new Date().getTime();
         const res = await fetch(
-          `https://corsproxy.io/?https://fantasy.premierleague.com/api/entry/${TeamId}/?_=${timeStamp}`
+          `${baseLink}/api/entry/${TeamId}/?_=${timeStamp}`
         );
 
         if (!res.ok) {
@@ -112,7 +114,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
         setData(data);
 
         const res1 = await fetch(
-          `https://corsproxy.io/?https://fantasy.premierleague.com/api/entry/${TeamId}/event/${data.current_event}/picks/?_=${timeStamp}`
+          `${baseLink}/api/entry/${TeamId}/event/${data.current_event}/picks/?_=${timeStamp}`
         );
 
         if (!res1.ok) {
@@ -126,7 +128,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
         setDataCurr(data1);
 
         const res2 = await fetch(
-          `https://corsproxy.io/?https://fantasy.premierleague.com/api/entry/${TeamId}/event/${
+          `${baseLink}/api/entry/${TeamId}/event/${
             data.current_event - 1
           }/picks/?_=${timeStamp}`
         );
@@ -154,7 +156,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
       if (data.current_event == 0) return;
       const timeStamp = new Date().getTime();
       const res = await fetch(
-        `https://corsproxy.io/?https://fantasy.premierleague.com/api/event/${data.current_event}/live/?_=${timeStamp}`
+        `${baseLink}/api/event/${data.current_event}/live/?_=${timeStamp}`
       );
       const data1 = await res.json();
       setDataLive(data1.elements);

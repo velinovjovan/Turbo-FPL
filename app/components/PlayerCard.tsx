@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import React from "react";
 
@@ -27,8 +26,6 @@ const PlayerCard = ({
   };
 
   const isCaptain = multiplier > 1;
-
-  console.log(photo, name);
 
   return (
     <div className="group relative">

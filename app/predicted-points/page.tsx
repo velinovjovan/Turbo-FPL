@@ -3,6 +3,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import ErrorScreen from "../components/ErrorScreen";
 import TablePredict from "../components/TablePredict";
+import { devLink } from "../API/devLink";
+import { prodLink } from "../API/prodLink";
+
+const baseLink = process.env.NODE_ENV === "development" ? devLink : prodLink;
 
 const PredictedPoints = () => {
   const [data, setData] = useState({
@@ -49,7 +53,7 @@ const PredictedPoints = () => {
       try {
         const timeStamp = new Date().getTime();
         const response = await fetch(
-          `https://corsproxy.io/?https://fantasy.premierleague.com/api/bootstrap-static/?_=${timeStamp}`
+          `${baseLink}/api/bootstrap-static/?_=${timeStamp}`
         );
 
         if (!response.ok) {

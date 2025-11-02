@@ -1,6 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Chip from "./Chip";
+import { devLink } from "../API/devLink";
+import { prodLink } from "../API/prodLink";
+
+const baseLink = process.env.NODE_ENV === "development" ? devLink : prodLink;
 
 const ChipTable = ({
   active_chip,
@@ -18,7 +22,7 @@ const ChipTable = ({
         setIsLoading(true);
         const timeStamp = new Date().getTime();
         const res = await fetch(
-          `https://corsproxy.io/?https://fantasy.premierleague.com/api/entry/${id}/history/?_=${timeStamp}`
+          `${baseLink}/api/entry/${id}/history/?_=${timeStamp}`
         );
 
         if (!res.ok) {

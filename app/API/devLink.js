@@ -1,1 +1,2 @@
-export const devLink = "https://fantasy.premierleague.com";
+export const devLink =
+  "https://corsproxy.io/?https://fantasy.premierleague.com";

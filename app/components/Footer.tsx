@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="relative max-w-screen-xl px-4 py-12 mx-auto space-y-8 sm:px-6 lg:px-8">
         <div className="flex justify-center gap-8">
           <a
-            href="https://www.instagram.com/jovanw_/"
+            href="https://www.instagram.com/velinovjovan"
             className="group relative text-gray-400 hover:text-cyan-400 transition-all duration-300"
             target="_blank"
             rel="noopener noreferrer"

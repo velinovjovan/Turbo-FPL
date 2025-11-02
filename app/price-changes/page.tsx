@@ -2,6 +2,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import TablePrice from "../components/TablePrice";
 import ErrorScreen from "../components/ErrorScreen";
+import { devLink } from "../API/devLink";
+import { prodLink } from "../API/prodLink";
+
+const baseLink = process.env.NODE_ENV === "development" ? devLink : prodLink;
 
 const PriceChanges = () => {
   const [players, setPlayers] = useState({
@@ -28,7 +32,7 @@ const PriceChanges = () => {
       try {
         const timeStamp = new Date().getTime();
         const response = await fetch(
-          `https://corsproxy.io/?https://fantasy.premierleague.com/api/bootstrap-static/?_=${timeStamp}`
+          `${baseLink}/api/bootstrap-static/?_=${timeStamp}`
         );
 
         if (!response.ok) {

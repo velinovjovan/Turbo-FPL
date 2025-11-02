@@ -53,7 +53,6 @@ const FormTeam = () => {
               value={id}
               onChange={handleOnChange}
               min="1"
-              max="12360377"
             />
           </div>
           <button
