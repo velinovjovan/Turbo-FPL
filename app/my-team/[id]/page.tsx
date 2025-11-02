@@ -209,7 +209,6 @@ const TeamView = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black pt-56 pb-20 px-4 sm:px-6 lg:px-8">
-      <div className="absolute top-40 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
       <div
         className="absolute bottom-40 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"
         style={{ animationDelay: "1s" }}
