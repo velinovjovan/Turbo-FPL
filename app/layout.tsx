@@ -29,6 +29,8 @@ export default function RootLayout({
           type="image/x-icon"
           href="https://turbo-fpl.vercel.app/favicon.ico"
         ></link>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#072763ff" />
       </head>
       <body className={inter.className}>
         <NavBar />
