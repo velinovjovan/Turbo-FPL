@@ -8,8 +8,13 @@
   "description": "Free AI powered website about Fantasy Premier League",
   "icons": [
     {
-      "src": "/icons/FPLTurboIcon.png",
+      "src": "/FPLTurboIcon.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/FPLTurboIcon.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
