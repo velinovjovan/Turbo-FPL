@@ -118,7 +118,9 @@ const Chip = ({
         ></div>
         <Image
           className={`relative z-10 w-16 md:w-20 lg:w-24 h-auto transition-all duration-300 ${
-            status === "Used"
+            isActive
+              ? "opacity-90 group-hover:opacity-100 group-hover:scale-110"
+              : status === "Used"
               ? "opacity-40 grayscale"
               : "opacity-90 group-hover:opacity-100 group-hover:scale-110"
           }`}
@@ -126,9 +128,7 @@ const Chip = ({
           width={120}
           height={120}
           alt={`${name} chip`}
-          src={`https://fantasy.premierleague.com/img/chips/${code}${
-            isActive ? "Active" : "Inactive"
-          }-120.png`}
+          src={`https://fantasy.premierleague.com/img/chips/${code}-120.png`}
         />
       </div>
       <h3 className="text-center text-base md:text-lg font-bold text-white mb-3">
