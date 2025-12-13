@@ -1,6 +1,6 @@
-# Turbo FPL ⚡
+# Turbo FPL ⚽
 
-**Turbo FPL** is a modern Fantasy Premier League analytics and prediction platform built with **Next.js**, **Supabase**, and **machine learning**. It provides a fast, interactive experience for FPL managers to track player stats, predict points, and optimize their teams with data-driven insights.
+**Turbo FPL** is a modern Fantasy Premier League analytics and prediction platform. It provides a fast, interactive experience for FPL managers to track player stats, predict points, and optimize their teams with data-driven insights.
 
 ---
 
@@ -14,16 +14,15 @@
 
 ---
 
-## 🧠 Tech Stack
+## ⚙️ Tech Stack
 
 - **Frontend:** [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/) + [Tailwind CSS](https://tailwindcss.com/)
-- **Backend:** [Supabase](https://supabase.com/) (authentication, database, API)
 - **Machine Learning:** Python (`scikit-learn`) for model training
 - **Data:** Official [FPL API](https://fantasy.premierleague.com/api/)
 
 ---
 
-## ⚙️ Setup & Installation
+## 🧩 Installation
 
 1. **Clone the repository**
 
