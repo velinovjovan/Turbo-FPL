@@ -7,27 +7,11 @@ import { useFplBootstrap } from "../providers/FplProvider";
 const PriceChanges = () => {
   const { bootstrap, isLoading, error } = useFplBootstrap();
 
-  if (error) {
-    return <ErrorScreen />;
-  }
-
-  if (isLoading || !bootstrap) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black flex items-center justify-center pt-24">
-        <div className="flex flex-col items-center justify-center">
-          <div className="relative">
-            <div className="w-16 h-16 border-4 border-emerald-500/20 border-solid rounded-full"></div>
-            <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
-          </div>
-          <p className="mt-6 text-lg font-semibold text-gray-300">
-            Loading price projections...
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   const sortedPlayers = useMemo(() => {
+    if (!bootstrap) {
+      return [];
+    }
+
     return bootstrap.elements
       .filter((el) => el.element_type !== 5)
       .map((player) => {
@@ -78,6 +62,26 @@ const PriceChanges = () => {
         };
       });
   }, [bootstrap]);
+
+  if (error) {
+    return <ErrorScreen />;
+  }
+
+  if (isLoading || !bootstrap) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black flex items-center justify-center pt-24">
+        <div className="flex flex-col items-center justify-center">
+          <div className="relative">
+            <div className="w-16 h-16 border-4 border-emerald-500/20 border-solid rounded-full"></div>
+            <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
+          </div>
+          <p className="mt-6 text-lg font-semibold text-gray-300">
+            Loading price projections...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden pt-24">
