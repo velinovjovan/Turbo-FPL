@@ -63,7 +63,12 @@ const TableOpta = ({ Data }: TableOptaProps) => {
             ? Number(valueB) - Number(valueA)
             : Number(valueA) - Number(valueB);
         } else {
-          return sortOrder === "desc" ? +valueB - +valueA : +valueA - +valueB;
+          const numericA = Number(valueA ?? 0);
+          const numericB = Number(valueB ?? 0);
+
+          return sortOrder === "desc"
+            ? numericB - numericA
+            : numericA - numericB;
         }
       });
   }, [sortAttribute, sortOrder, Data.elements]);

@@ -2,12 +2,13 @@
 import React, { useMemo } from "react";
 import TablePrice from "../components/TablePrice";
 import ErrorScreen from "../components/ErrorScreen";
+import type { PricePlayer } from "../types";
 import { useFplBootstrap } from "../providers/FplProvider";
 
 const PriceChanges = () => {
   const { bootstrap, isLoading, error } = useFplBootstrap();
 
-  const sortedPlayers = useMemo(() => {
+  const sortedPlayers = useMemo<PricePlayer[]>(() => {
     if (!bootstrap) {
       return [];
     }
@@ -17,16 +18,20 @@ const PriceChanges = () => {
       .map((player) => {
         const ownership =
           (bootstrap.total_players * Number(player.selected_by_percent)) / 100;
-        const netGain = player.transfers_in - player.transfers_out;
+        const selectedByPercent = player.selected_by_percent ?? "0";
+        const transfersIn = player.transfers_in ?? 0;
+        const transfersOut = player.transfers_out ?? 0;
+        const transfersInEvent = player.transfers_in_event ?? 0;
+        const transfersOutEvent = player.transfers_out_event ?? 0;
+        const costChangeEvent = player.cost_change_event ?? 0;
+        const costChangeStart = player.cost_change_start ?? 0;
+        const netGain = transfersIn - transfersOut;
 
         const defOwnership = ownership - netGain;
 
         const lastChange =
           defOwnership *
-          Math.pow(
-            player.cost_change_start >= 0 ? 1.1 : 0.9,
-            Math.abs(player.cost_change_start),
-          );
+          Math.pow(costChangeStart >= 0 ? 1.1 : 0.9, Math.abs(costChangeStart));
 
         let progress;
 
@@ -58,6 +63,13 @@ const PriceChanges = () => {
 
         return {
           ...player,
+          selected_by_percent: selectedByPercent,
+          transfers_in: transfersIn,
+          transfers_out: transfersOut,
+          transfers_in_event: transfersInEvent,
+          transfers_out_event: transfersOutEvent,
+          cost_change_event: costChangeEvent,
+          cost_change_start: costChangeStart,
           progress: progress,
         };
       });

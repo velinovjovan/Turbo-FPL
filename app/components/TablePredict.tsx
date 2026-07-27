@@ -8,7 +8,7 @@ import type { FplBootstrapPlayer, TablePredictProps } from "../types";
 const TablePredict = ({ Data }: TablePredictProps) => {
   const [num, setNum] = useState(20);
   const [playersWithPredictions, setPlayersWithPredictions] = useState<
-    Player[]
+    FplBootstrapPlayer[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
   const [gw, setGw] = useState(0);
@@ -30,20 +30,27 @@ const TablePredict = ({ Data }: TablePredictProps) => {
       const session = await ort.InferenceSession.create("/fpl_predictor.onnx");
 
       const inputs = players.map((player) => {
-        const gp = Math.max(
-          1,
-          Math.round(player.total_points / Number(player.points_per_game)),
+        const pointsPerGame = Math.max(1, Number(player.points_per_game ?? 0));
+        const cleanSheets = player.clean_sheets ?? 0;
+        const yellowCards = player.yellow_cards ?? 0;
+        const saves = player.saves ?? 0;
+        const expectedGoals = Number(player.expected_goals ?? 0);
+        const expectedAssists = Number(player.expected_assists ?? 0);
+        const expectedGoalsConceded = Number(
+          player.expected_goals_conceded ?? 0,
         );
+
+        const gp = Math.max(1, Math.round(player.total_points / pointsPerGame));
         return [
           player.minutes / gp,
           player.goals_scored / gp,
           player.assists / gp,
-          player.clean_sheets / gp,
-          player.yellow_cards / gp,
-          player.saves / gp,
-          Number(player.expected_goals) / gp,
-          Number(player.expected_assists) / gp,
-          Number(player.expected_goals_conceded) / gp,
+          cleanSheets / gp,
+          yellowCards / gp,
+          saves / gp,
+          expectedGoals / gp,
+          expectedAssists / gp,
+          expectedGoalsConceded / gp,
         ];
       });
 
@@ -207,25 +214,33 @@ const TablePredict = ({ Data }: TablePredictProps) => {
                           }`}
                         >
                           <td className="px-6 py-8">
-                            <div className="flex flex-col items-center justify-center gap-3">
-                              <div className="relative group">
-                                <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
-                                <Image
-                                  className="relative z-10 w-20 h-24 object-contain"
-                                  unoptimized
-                                  width={77}
-                                  height={98}
-                                  alt={`${player.web_name} photo`}
-                                  src={`https://resources.premierleague.com/premierleague25/photos/players/110x140/${player.photo.slice(
+                            {(() => {
+                              const playerImageSrc = player.photo
+                                ? `https://resources.premierleague.com/premierleague25/photos/players/110x140/${player.photo.slice(
                                     0,
                                     -3,
-                                  )}png`}
-                                />
-                              </div>
-                              <p className="font-semibold text-gray-300">
-                                {player.web_name}
-                              </p>
-                            </div>
+                                  )}png`
+                                : "/FPLTurboIcon.png";
+
+                              return (
+                                <div className="flex flex-col items-center justify-center gap-3">
+                                  <div className="relative group">
+                                    <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                                    <Image
+                                      className="relative z-10 w-20 h-24 object-contain"
+                                      unoptimized
+                                      width={77}
+                                      height={98}
+                                      alt={`${player.web_name} photo`}
+                                      src={playerImageSrc}
+                                    />
+                                  </div>
+                                  <p className="font-semibold text-gray-300">
+                                    {player.web_name}
+                                  </p>
+                                </div>
+                              );
+                            })()}
                           </td>
                           <td className="px-6 py-8 text-center">
                             <span className="inline-flex items-center gap-2 px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-lg text-gray-300 font-semibold">
