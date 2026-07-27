@@ -1,19 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Chip from "./Chip";
-import { devLink } from "../API/devLink";
-import { prodLink } from "../API/prodLink";
+import { baseLink } from "../lib/fpl";
+import type { ChipTableProps, FplChipHistory } from "../types";
 
-const baseLink = process.env.NODE_ENV === "development" ? devLink : prodLink;
-
-const ChipTable = ({
-  active_chip,
-  id,
-}: {
-  active_chip: string;
-  id: number;
-}) => {
-  const [data, setData] = useState<{ name: string }[]>([]);
+const ChipTable = ({ active_chip, id }: ChipTableProps) => {
+  const [data, setData] = useState<FplChipHistory["chips"]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -22,7 +14,7 @@ const ChipTable = ({
         setIsLoading(true);
         const timeStamp = new Date().getTime();
         const res = await fetch(
-          `${baseLink}/api/entry/${id}/history/?_=${timeStamp}`
+          `${baseLink}/api/entry/${id}/history/?_=${timeStamp}`,
         );
 
         if (!res.ok) {

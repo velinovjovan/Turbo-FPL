@@ -1,11 +1,7 @@
 import React from "react";
+import type { MenuIconProps } from "../types";
 
-interface Props {
-  setNavbar: React.Dispatch<React.SetStateAction<boolean>>;
-  navbar: boolean;
-}
-
-const MenuIcon: React.FC<Props> = ({ navbar, setNavbar }) => {
+const MenuIcon: React.FC<MenuIconProps> = ({ navbar, setNavbar }) => {
   return (
     <div className="md:hidden">
       <button

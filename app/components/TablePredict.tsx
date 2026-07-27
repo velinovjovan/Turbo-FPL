@@ -3,38 +3,9 @@ import React, { useEffect, useState } from "react";
 import * as ort from "onnxruntime-web";
 import Image from "next/image";
 import CountUp from "react-countup";
+import type { FplBootstrapPlayer, TablePredictProps } from "../types";
 
-type Player = {
-  web_name: string;
-  now_cost: number;
-  starts: number;
-  minutes: number;
-  bps: number;
-  bonus: number;
-  assists: number;
-  goals_scored: number;
-  expected_assists: string;
-  expected_assists_per_90: number;
-  expected_goal_involvements: string;
-  expected_goal_involvements_per_90: number;
-  expected_goals: string;
-  total_points: number;
-  id: number;
-  points_per_game: string;
-  clean_sheets: number;
-  saves: number;
-  yellow_cards: number;
-  expected_goals_conceded: string;
-  selected_by_percent: string;
-  photo: string;
-  element_type: number;
-};
-
-const TablePredict = ({
-  Data,
-}: {
-  Data: { elements: Player[]; events: { is_current: boolean; id: number }[] };
-}) => {
+const TablePredict = ({ Data }: TablePredictProps) => {
   const [num, setNum] = useState(20);
   const [playersWithPredictions, setPlayersWithPredictions] = useState<
     Player[]
@@ -54,14 +25,14 @@ const TablePredict = ({
     else setNum(Number(e.target.value));
   };
 
-  const runModelForAllPlayers = async (players: Player[]) => {
+  const runModelForAllPlayers = async (players: FplBootstrapPlayer[]) => {
     try {
       const session = await ort.InferenceSession.create("/fpl_predictor.onnx");
 
       const inputs = players.map((player) => {
         const gp = Math.max(
           1,
-          Math.round(player.total_points / Number(player.points_per_game))
+          Math.round(player.total_points / Number(player.points_per_game)),
         );
         return [
           player.minutes / gp,
@@ -79,7 +50,7 @@ const TablePredict = ({
       const inputTensor = new ort.Tensor(
         "float32",
         Float32Array.from(inputs.flat()),
-        [players.length, 9]
+        [players.length, 9],
       );
 
       const feeds = { float_input: inputTensor };
@@ -114,16 +85,15 @@ const TablePredict = ({
     const fetchPredictions = async () => {
       setIsLoading(true);
       const sortedTopPlayers = Data.elements
-        .filter((el: any) => el.element_type !== 5)
+        .filter((el: FplBootstrapPlayer) => el.element_type !== 5)
         .sort(
           (a, b) =>
-            Number(b.selected_by_percent) - Number(a.selected_by_percent)
+            Number(b.selected_by_percent) - Number(a.selected_by_percent),
         )
         .slice(0, num);
 
-      const playersWithPredictions = await runModelForAllPlayers(
-        sortedTopPlayers
-      );
+      const playersWithPredictions =
+        await runModelForAllPlayers(sortedTopPlayers);
 
       setPlayersWithPredictions(playersWithPredictions);
       setIsLoading(false);
@@ -248,7 +218,7 @@ const TablePredict = ({
                                   alt={`${player.web_name} photo`}
                                   src={`https://resources.premierleague.com/premierleague25/photos/players/110x140/${player.photo.slice(
                                     0,
-                                    -3
+                                    -3,
                                   )}png`}
                                 />
                               </div>
@@ -268,8 +238,8 @@ const TablePredict = ({
                                 start={0.0}
                                 end={Number(
                                   Number(
-                                    (player as any).predicted_points
-                                  ).toFixed(2)
+                                    (player as any).predicted_points,
+                                  ).toFixed(2),
                                 )}
                                 duration={2}
                                 decimals={2}

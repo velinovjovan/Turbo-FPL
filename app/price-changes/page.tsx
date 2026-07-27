@@ -1,61 +1,38 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import TablePrice from "../components/TablePrice";
 import ErrorScreen from "../components/ErrorScreen";
-import { devLink } from "../API/devLink";
-import { prodLink } from "../API/prodLink";
-
-const baseLink = process.env.NODE_ENV === "development" ? devLink : prodLink;
+import { useFplBootstrap } from "../providers/FplProvider";
 
 const PriceChanges = () => {
-  const [players, setPlayers] = useState({
-    elements: [
-      {
-        cost_change_start: 0,
-        cost_change_event: 0,
-        transfers_in_event: 0,
-        transfers_out_event: 0,
-        transfers_in: 0,
-        transfers_out: 0,
-        selected_by_percent: "",
-        web_name: "",
-        now_cost: 0,
-        id: 0,
-      },
-    ],
-    total_players: 0,
-  });
-  const [error, setError] = useState(false);
+  const { bootstrap, isLoading, error } = useFplBootstrap();
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const timeStamp = new Date().getTime();
-        const response = await fetch(
-          `${baseLink}/api/bootstrap-static/?_=${timeStamp}`
-        );
+  if (error) {
+    return <ErrorScreen />;
+  }
 
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-
-        const result = await response.json();
-        setPlayers(result);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-        setError(true);
-      }
-    };
-
-    getData();
-  }, []);
+  if (isLoading || !bootstrap) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black flex items-center justify-center pt-24">
+        <div className="flex flex-col items-center justify-center">
+          <div className="relative">
+            <div className="w-16 h-16 border-4 border-emerald-500/20 border-solid rounded-full"></div>
+            <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
+          </div>
+          <p className="mt-6 text-lg font-semibold text-gray-300">
+            Loading price projections...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const sortedPlayers = useMemo(() => {
-    return players.elements
-      .filter((el: any) => el.element_type !== 5)
+    return bootstrap.elements
+      .filter((el) => el.element_type !== 5)
       .map((player) => {
         const ownership =
-          (players.total_players * Number(player.selected_by_percent)) / 100;
+          (bootstrap.total_players * Number(player.selected_by_percent)) / 100;
         const netGain = player.transfers_in - player.transfers_out;
 
         const defOwnership = ownership - netGain;
@@ -64,7 +41,7 @@ const PriceChanges = () => {
           defOwnership *
           Math.pow(
             player.cost_change_start >= 0 ? 1.1 : 0.9,
-            Math.abs(player.cost_change_start)
+            Math.abs(player.cost_change_start),
           );
 
         let progress;
@@ -100,11 +77,7 @@ const PriceChanges = () => {
           progress: progress,
         };
       });
-  }, [players]);
-
-  if (error) {
-    return <ErrorScreen />;
-  }
+  }, [bootstrap]);
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden pt-24">

@@ -1,16 +1,7 @@
 import React from "react";
+import type { PriceCompProps } from "../types";
 
-const PriceComp = ({
-  name,
-  cost,
-  progress,
-  index,
-}: {
-  name: string;
-  cost: number;
-  progress: number;
-  index?: number;
-}) => {
+const PriceComp = ({ name, cost, progress, index }: PriceCompProps) => {
   const isRise = progress >= 0;
   const absProgress = Math.abs(progress);
   const progressWidth = absProgress < 100 ? absProgress : 100;
@@ -105,8 +96,8 @@ const PriceComp = ({
             absProgress > 90
               ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
               : absProgress < 50
-              ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-              : "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                : "bg-purple-500/20 text-purple-400 border border-purple-500/30"
           }`}
         >
           {absProgress > 90 && (

@@ -1,17 +1,8 @@
 import Image from "next/image";
 import React from "react";
+import type { ChipProps } from "../types";
 
-const Chip = ({
-  name,
-  code,
-  status,
-  isActive = false,
-}: {
-  name: string;
-  code: string;
-  status: string;
-  isActive?: boolean;
-}) => {
+const Chip = ({ name, code, status, isActive = false }: ChipProps) => {
   const getStatusStyles = () => {
     if (isActive) {
       return "bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-cyan-400 shadow-lg shadow-cyan-500/50";
@@ -88,8 +79,8 @@ const Chip = ({
         isActive
           ? "border-cyan-500 shadow-lg shadow-cyan-500/30"
           : status === "Used"
-          ? "border-slate-700"
-          : "border-emerald-500/30 hover:border-emerald-500/50"
+            ? "border-slate-700"
+            : "border-emerald-500/30 hover:border-emerald-500/50"
       }`}
     >
       {isActive && (
@@ -112,8 +103,8 @@ const Chip = ({
             isActive
               ? "bg-cyan-500/50 opacity-100"
               : status === "Available"
-              ? "bg-emerald-500/30 opacity-0 group-hover:opacity-100"
-              : "opacity-0"
+                ? "bg-emerald-500/30 opacity-0 group-hover:opacity-100"
+                : "opacity-0"
           }`}
         ></div>
         <Image
@@ -121,8 +112,8 @@ const Chip = ({
             isActive
               ? "opacity-90 group-hover:opacity-100 group-hover:scale-110"
               : status === "Used"
-              ? "opacity-40 grayscale"
-              : "opacity-90 group-hover:opacity-100 group-hover:scale-110"
+                ? "opacity-40 grayscale"
+                : "opacity-90 group-hover:opacity-100 group-hover:scale-110"
           }`}
           unoptimized
           width={120}

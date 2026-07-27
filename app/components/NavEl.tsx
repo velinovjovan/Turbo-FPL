@@ -1,13 +1,8 @@
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import React from "react";
+import type { NavElProps } from "../types";
 
-interface Props {
-  setNavbar: React.Dispatch<React.SetStateAction<boolean>>;
-  children: ReactNode;
-  path: string;
-}
-
-const NavEl: React.FC<Props> = ({ setNavbar, children, path }) => {
+const NavEl: React.FC<NavElProps> = ({ setNavbar, children, path }) => {
   return (
     <li className="group relative text-base lg:text-lg py-3 px-5 lg:px-6 text-center transition-all duration-300 z-100">
       <Link

@@ -1,17 +1,8 @@
 import Image from "next/image";
 import React from "react";
+import type { PlayerCardProps } from "../types";
 
-const PlayerCard = ({
-  photo,
-  name,
-  score,
-  multiplier,
-}: {
-  photo: string;
-  name: string;
-  score: number;
-  multiplier: number;
-}) => {
+const PlayerCard = ({ photo, name, score, multiplier }: PlayerCardProps) => {
   const formatPlayerName = (inputString: string) => {
     let formatted = inputString;
     const hyphenIndex = formatted.indexOf("-");
@@ -60,7 +51,7 @@ const PlayerCard = ({
             alt={`${name}`}
             src={`https://resources.premierleague.com/premierleague25/photos/players/110x140/${photo.slice(
               0,
-              -3
+              -3,
             )}png`}
           />
         </div>
@@ -83,10 +74,10 @@ const PlayerCard = ({
           score > 5
             ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-500/50"
             : score < 0
-            ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/50"
-            : score > 0
-            ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/50"
-            : "bg-slate-700 text-gray-300 border border-slate-600"
+              ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/50"
+              : score > 0
+                ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/50"
+                : "bg-slate-700 text-gray-300 border border-slate-600"
         }`}
       >
         {score}

@@ -1,21 +1,8 @@
 import React from "react";
 import PriceComp from "./PriceComp";
+import type { TablePriceProps } from "../types";
 
-type PricePlayer = {
-  progress: number;
-  cost_change_start: number;
-  cost_change_event: number;
-  transfers_in_event: number;
-  transfers_out_event: number;
-  transfers_in: number;
-  transfers_out: number;
-  selected_by_percent: string;
-  web_name: string;
-  now_cost: number;
-  id: number;
-};
-
-const TablePrice = ({ sortedPlayers }: { sortedPlayers: PricePlayer[] }) => {
+const TablePrice = ({ sortedPlayers }: TablePriceProps) => {
   const filteredPlayers = sortedPlayers
     .filter((player) => Number(player.selected_by_percent) > 10)
     .sort((a, b) => b.progress - a.progress);

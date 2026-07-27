@@ -2,19 +2,28 @@
 import ChipTable from "@/app/components/ChipTable";
 import ErrorScreen from "@/app/components/ErrorScreen";
 import PlayerCard from "@/app/components/PlayerCard";
+import { useFplBootstrap } from "@/app/providers/FplProvider";
+import type {
+  FplBootstrapData,
+  FplLivePlayer,
+  FplTeamHistory,
+  FplTeamSummary,
+} from "@/app/types";
 import { notFound } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { devLink } from "../../API/devLink";
-import { prodLink } from "../../API/prodLink";
-
-const baseLink = process.env.NODE_ENV === "development" ? devLink : prodLink;
+import { baseLink } from "@/app/lib/fpl";
 
 const TeamView = ({ params }: { params: { id: string } }) => {
   const TeamId = params.id;
+  const {
+    bootstrap,
+    isLoading: isBootstrapLoading,
+    error: bootstrapError,
+  } = useFplBootstrap();
 
   if (Number(TeamId) > 12360377 || Number(TeamId) < 1) notFound();
 
-  const [data, setData] = useState({
+  const [data, setData] = useState<FplTeamSummary>({
     name: "",
     player_first_name: "",
     player_last_name: "",
@@ -22,7 +31,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
     summary_event_points: 0,
   });
 
-  const [dataCurr, setDataCurr] = useState({
+  const [dataCurr, setDataCurr] = useState<FplTeamHistory>({
     picks: [{ element: 1, multiplier: 1, position: 1 }],
     active_chip: "",
     automatic_subs: [],
@@ -34,68 +43,27 @@ const TeamView = ({ params }: { params: { id: string } }) => {
       bank: 0,
     },
   });
-  const [dataPrev, setDataPrev] = useState({
+  const [dataPrev, setDataPrev] = useState<FplTeamHistory>({
     picks: [{ element: 1, multiplier: 1, position: 1 }],
     active_chip: "",
     automatic_subs: [],
     entry_history: { total_points: 0, value: 0, overall_rank: 0, rank: 0 },
   });
 
-  const [dataLive, setDataLive] = useState([
+  const [dataLive, setDataLive] = useState<FplLivePlayer[]>([
     { stats: { total_points: 0 }, id: 0 },
   ]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [players, setPlayers] = useState({
-    elements: [
-      {
-        web_name: "",
-        now_cost: 0,
-        starts: 0,
-        minutes: 0,
-        bps: 0,
-        bonus: 0,
-        assists: 0,
-        goals_scored: 0,
-        expected_assists: "",
-        expected_assists_per_90: 0,
-        expected_goal_involvements: "",
-        expected_goal_involvements_per_90: 0,
-        expected_goals: "",
-        total_points: 0,
-        id: 0,
-        photo: "",
-        element_type: 0,
-      },
-    ],
-  });
-
   const [totalPoints, setTotalPoints] = useState(0);
   const [num, setNum] = useState(12);
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const timeStamp = new Date().getTime();
-        const response = await fetch(
-          `${baseLink}/api/bootstrap-static/?_=${timeStamp}`
-        );
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-
-        const result = await response.json();
-        setPlayers(result);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-        setError(true);
-      }
-    };
-
-    getData();
-  }, []);
+  const players: FplBootstrapData = bootstrap ?? {
+    elements: [],
+    events: [],
+    total_players: 0,
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -103,7 +71,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
         setIsLoading(true);
         const timeStamp = new Date().getTime();
         const res = await fetch(
-          `${baseLink}/api/entry/${TeamId}/?_=${timeStamp}`
+          `${baseLink}/api/entry/${TeamId}/?_=${timeStamp}`,
         );
 
         if (!res.ok) {
@@ -114,7 +82,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
         setData(data);
 
         const res1 = await fetch(
-          `${baseLink}/api/entry/${TeamId}/event/${data.current_event}/picks/?_=${timeStamp}`
+          `${baseLink}/api/entry/${TeamId}/event/${data.current_event}/picks/?_=${timeStamp}`,
         );
 
         if (!res1.ok) {
@@ -130,7 +98,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
         const res2 = await fetch(
           `${baseLink}/api/entry/${TeamId}/event/${
             data.current_event - 1
-          }/picks/?_=${timeStamp}`
+          }/picks/?_=${timeStamp}`,
         );
 
         if (!res2.ok) {
@@ -156,7 +124,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
       if (data.current_event == 0) return;
       const timeStamp = new Date().getTime();
       const res = await fetch(
-        `${baseLink}/api/event/${data.current_event}/live/?_=${timeStamp}`
+        `${baseLink}/api/event/${data.current_event}/live/?_=${timeStamp}`,
       );
       const data1 = await res.json();
       setDataLive(data1.elements);
@@ -168,7 +136,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     const pickedPlayerIds = dataCurr.picks
       .map((pick) =>
-        pick.position < num ? Array(pick.multiplier).fill(pick.element) : null
+        pick.position < num ? Array(pick.multiplier).fill(pick.element) : null,
       )
       .flat();
 
@@ -176,7 +144,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
       .filter((player) => pickedPlayerIds.includes(player.id))
       .reduce((sum, player) => {
         const playerCount = pickedPlayerIds.filter(
-          (id) => id === player.id
+          (id) => id === player.id,
         ).length;
 
         return sum + player.stats.total_points * playerCount;
@@ -189,11 +157,11 @@ const TeamView = ({ params }: { params: { id: string } }) => {
     return new Intl.NumberFormat("en-US").format(num);
   };
 
-  if (error) {
+  if (error || bootstrapError) {
     return <ErrorScreen />;
   }
 
-  if (isLoading) {
+  if (isLoading || isBootstrapLoading || !bootstrap) {
     return (
       <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black flex items-center justify-center">
         <div className="flex flex-col justify-center items-center">
@@ -250,17 +218,17 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                         <PlayerCard
                           key={el.id}
                           name={el.web_name}
-                          photo={el.photo}
+                          photo={el.photo ?? ""}
                           score={
                             dataLive?.at(el.id - 1)?.stats.total_points
                               ? Number(
-                                  dataLive.at(el.id - 1)?.stats.total_points
+                                  dataLive.at(el.id - 1)?.stats.total_points,
                                 ) * player.multiplier
                               : 0
                           }
                           multiplier={player.multiplier}
                         />
-                      ) : null
+                      ) : null,
                     )}
                   </React.Fragment>
                 ))}
@@ -275,17 +243,17 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                         <PlayerCard
                           key={el.id}
                           name={el.web_name}
-                          photo={el.photo}
+                          photo={el.photo ?? ""}
                           score={
                             dataLive?.at(el.id - 1)?.stats.total_points
                               ? Number(
-                                  dataLive.at(el.id - 1)?.stats.total_points
+                                  dataLive.at(el.id - 1)?.stats.total_points,
                                 ) * player.multiplier
                               : 0
                           }
                           multiplier={player.multiplier}
                         />
-                      ) : null
+                      ) : null,
                     )}
                   </React.Fragment>
                 ))}
@@ -300,17 +268,17 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                         <PlayerCard
                           key={el.id}
                           name={el.web_name}
-                          photo={el.photo}
+                          photo={el.photo ?? ""}
                           score={
                             dataLive?.at(el.id - 1)?.stats.total_points
                               ? Number(
-                                  dataLive.at(el.id - 1)?.stats.total_points
+                                  dataLive.at(el.id - 1)?.stats.total_points,
                                 ) * player.multiplier
                               : 0
                           }
                           multiplier={player.multiplier}
                         />
-                      ) : null
+                      ) : null,
                     )}
                   </React.Fragment>
                 ))}
@@ -325,17 +293,17 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                         <PlayerCard
                           key={el.id}
                           name={el.web_name}
-                          photo={el.photo}
+                          photo={el.photo ?? ""}
                           score={
                             dataLive?.at(el.id - 1)?.stats.total_points
                               ? Number(
-                                  dataLive.at(el.id - 1)?.stats.total_points
+                                  dataLive.at(el.id - 1)?.stats.total_points,
                                 ) * player.multiplier
                               : 0
                           }
                           multiplier={player.multiplier}
                         />
-                      ) : null
+                      ) : null,
                     )}
                   </React.Fragment>
                 ))}
@@ -353,17 +321,17 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                         <PlayerCard
                           key={el.id}
                           name={el.web_name}
-                          photo={el.photo}
+                          photo={el.photo ?? ""}
                           score={
                             dataLive?.at(el.id - 1)?.stats.total_points
                               ? Number(
-                                  dataLive.at(el.id - 1)?.stats.total_points
+                                  dataLive.at(el.id - 1)?.stats.total_points,
                                 )
                               : 0
                           }
                           multiplier={player.multiplier}
                         />
-                      ) : null
+                      ) : null,
                     )}
                   </React.Fragment>
                 ))}
@@ -456,7 +424,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                 <div className="flex justify-between items-center text-base sm:text-lg">
                   <span className="text-gray-400">Bank:</span>
                   <span className="font-bold text-emerald-400">
-                    £{formatNumber(dataCurr.entry_history.bank / 10)}
+                    £{formatNumber((dataCurr.entry_history.bank ?? 0) / 10)}
                   </span>
                 </div>
               </div>

@@ -1,11 +1,7 @@
-import React, { ReactNode } from "react";
+import React from "react";
+import type { NavMainProps } from "../types";
 
-interface Props {
-  children: ReactNode;
-  navbar: boolean;
-}
-
-const NavMain: React.FC<Props> = ({ children, navbar }) => {
+const NavMain: React.FC<NavMainProps> = ({ children, navbar }) => {
   return (
     <div
       className={`flex-1 justify-self-center pb-3 mt-8 md:pb-0 md:mt-0 md:block transition-all duration-300 ease-in-out ${

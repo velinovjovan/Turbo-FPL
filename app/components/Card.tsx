@@ -1,12 +1,7 @@
-import React, { ReactNode } from "react";
+import React from "react";
+import type { CardProps } from "../types";
 
-interface Props {
-  children: ReactNode;
-  title: string;
-  parag: string;
-}
-
-const Card = ({ children, title, parag }: Props) => {
+const Card = ({ children, title, parag }: CardProps) => {
   return (
     <div className=" max-w-[30rem] bg-slate-900/30 backdrop-blur-sm border border-slate-800/50 rounded-2xl p-8 transition-all duration-300 hover:bg-slate-900/50 hover:border-slate-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">
       <div className="flex justify-center mb-6">

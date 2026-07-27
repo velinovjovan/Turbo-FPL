@@ -1,28 +1,7 @@
 import React from "react";
+import type { TableCompProps } from "../types";
 
-const TableComp = ({
-  player,
-  index,
-}: {
-  player: {
-    web_name: string;
-    now_cost: number;
-    starts: number;
-    minutes: number;
-    bps: number;
-    bonus: number;
-    assists: number;
-    goals_scored: number;
-    expected_assists: string;
-    expected_assists_per_90: number;
-    expected_goal_involvements: string;
-    expected_goal_involvements_per_90: number;
-    expected_goals: string;
-    total_points: number;
-    id: number;
-  };
-  index?: number;
-}) => {
+const TableComp = ({ player, index }: TableCompProps) => {
   return (
     <tr
       className={`border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors duration-200 ${

@@ -1,33 +1,9 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import TableComp from "./TableComp";
+import type { FplBootstrapPlayer, TableOptaProps } from "../types";
 
-type Player = {
-  web_name: string;
-  now_cost: number;
-  starts: number;
-  minutes: number;
-  bps: number;
-  bonus: number;
-  assists: number;
-  goals_scored: number;
-  expected_assists: string;
-  expected_assists_per_90: number;
-  expected_goal_involvements: string;
-  expected_goal_involvements_per_90: number;
-  expected_goals: string;
-  total_points: number;
-  id: number;
-  element_type: number;
-};
-
-const TableOpta = ({
-  Data,
-}: {
-  Data: {
-    elements: Player[];
-  };
-}) => {
+const TableOpta = ({ Data }: TableOptaProps) => {
   const [sortAttribute, setSortAttribute] = useState<string>("total_points");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [num, setNum] = useState(20);
@@ -50,7 +26,7 @@ const TableOpta = ({
 
   const sortedPlayers = useMemo(() => {
     return [...Data.elements]
-      .filter((el: Player) => el.element_type !== 5)
+      .filter((el: FplBootstrapPlayer) => el.element_type !== 5)
       .sort((a, b) => {
         if (sortAttribute === "web_name") {
           const nameA = a.web_name.toLowerCase();
@@ -79,8 +55,8 @@ const TableOpta = ({
             : (a.assists + a.goals_scored) / a.minutes -
                 (b.assists + b.goals_scored) / b.minutes;
         }
-        const valueA = a[sortAttribute as keyof Player];
-        const valueB = b[sortAttribute as keyof Player];
+        const valueA = a[sortAttribute as keyof FplBootstrapPlayer];
+        const valueB = b[sortAttribute as keyof FplBootstrapPlayer];
 
         if (typeof valueA === "string" && typeof valueB === "string") {
           return sortOrder === "desc"
