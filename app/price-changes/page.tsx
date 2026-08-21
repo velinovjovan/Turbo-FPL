@@ -200,7 +200,7 @@ const PriceChanges = () => {
           </div>
         </div>
 
-        {currentGw >= 5 ? (
+        {currentGw >= 3 ? (
           <TablePrice sortedPlayers={sortedPlayers} />
         ) : (
           <div className="max-w-4xl mx-auto surface-card p-10 sm:p-14 text-center border border-emerald-500/20 rounded-2xl shadow-lg backdrop-blur-sm bg-slate-900/40">
@@ -220,7 +220,7 @@ const PriceChanges = () => {
               </svg>
             </div>
             <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-4">
-              Predictions Unlock After Gameweek 5
+              Predictions Unlock After Gameweek 3
             </h3>
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
               Our model requires sufficient transfer activity and performance
