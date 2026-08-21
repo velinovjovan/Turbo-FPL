@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Features
+## Features
 
 - **Landing Page** – A sleek introduction to Turbo FPL with quick navigation to all tools.
 - **My Team** – View your squad, monitor live points, and analyze player performance.
@@ -14,7 +14,7 @@
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - **Frontend:** [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/) + [Tailwind CSS](https://tailwindcss.com/)
 - **Machine Learning:** Python (`scikit-learn`) for model training
@@ -22,7 +22,7 @@
 
 ---
 
-## 🧩 Installation
+## Installation
 
 1. **Clone the repository**
 
@@ -47,7 +47,7 @@
 
 ---
 
-## 📊 Future Plans
+## Future Plans
 
 - 🧩 Add captaincy and transfer recommendations
 - 📈 Implement visual charts for player projections
