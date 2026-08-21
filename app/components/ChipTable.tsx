@@ -40,12 +40,12 @@ const ChipTable = ({ active_chip, id }: ChipTableProps) => {
   const isActive = (code: string) => active_chip === code;
 
   return (
-    <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-6">
+    <div className="surface-card p-6 mb-6">
       <div className="mb-6">
         <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-2">
           Chips Status
         </h2>
-        <p className="text-sm text-gray-400 text-center">
+        <p className="text-sm text-slate-400 text-center">
           Track your available and used power-ups
         </p>
       </div>
@@ -53,8 +53,8 @@ const ChipTable = ({ active_chip, id }: ChipTableProps) => {
       {isLoading ? (
         <div className="flex justify-center items-center py-12">
           <div className="relative">
-            <div className="w-12 h-12 border-4 border-cyan-500/20 border-solid rounded-full"></div>
-            <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
+            <div className="w-12 h-12 border-4 border-slate-600/30 border-solid rounded-full"></div>
+            <div className="w-12 h-12 border-4 border-slate-300 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
           </div>
         </div>
       ) : (
@@ -81,8 +81,8 @@ const ChipTable = ({ active_chip, id }: ChipTableProps) => {
       )}
 
       {!isLoading && active_chip && (
-        <div className="mt-6 p-4 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
-          <div className="flex items-center justify-center gap-2 text-cyan-400">
+        <div className="mt-6 p-4 bg-slate-800/70 border border-slate-600 rounded-lg">
+          <div className="flex items-center justify-center gap-2 text-slate-200">
             <svg
               className="w-5 h-5"
               fill="none"

@@ -13,10 +13,9 @@ function NavBar() {
     <nav
       className={`w-full ${
         navbar ? "h-fit" : "h-24"
-      }  bg-gradient-to-r from-slate-950 via-black to-slate-950 fixed top-0 inset-x-0 z-50 backdrop-blur-sm bg-opacity-95 border-b border-slate-800/50`}
+      } fixed top-0 inset-x-0 z-50 border-b border-slate-700/70 bg-slate-950/95 backdrop-blur`}
       aria-label="Main navigation"
     >
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
       <div className="justify-between px-4 ml-auto mr-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">

@@ -28,26 +28,24 @@ const FormTeam = () => {
 
   return (
     <div className="relative max-w-2xl mx-auto px-4 py-12">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
       <form className="relative z-10" onSubmit={handleOnSubmit}>
         <div className="mb-8 text-center">
           <label
             htmlFor="fpl-id-input"
-            className="block text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-white mb-3"
+            className="block text-2xl sm:text-3xl lg:text-4xl font-semibold text-white mb-3"
           >
             Enter your FPL ID
           </label>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-slate-400">
             Find your ID in the FPL website URL or app
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-center">
           <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur opacity-0 group-focus-within:opacity-100 transition-opacity duration-300"></div>
             <input
               id="fpl-id-input"
               type="number"
-              className="relative z-10 bg-slate-900/50 backdrop-blur-sm border border-slate-700 text-white text-base rounded-lg focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 block w-full sm:w-64 px-4 py-3 placeholder-gray-500 transition-all duration-300"
+              className="relative z-10 bg-slate-900/70 border border-slate-600 text-white text-base rounded-lg focus:ring-2 focus:ring-teal-400/40 focus:border-teal-400 block w-full sm:w-64 px-4 py-3 placeholder-slate-500 transition-all duration-300"
               placeholder="e.g. 1234567"
               required
               value={id}
@@ -58,7 +56,7 @@ const FormTeam = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="group relative inline-flex items-center justify-center gap-2 text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 font-semibold rounded-lg text-base px-6 py-3 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            className="group relative inline-flex items-center justify-center gap-2 text-white bg-teal-700 hover:bg-teal-600 font-semibold rounded-lg text-base px-6 py-3 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             {isLoading ? (
               <>
@@ -110,7 +108,7 @@ const FormTeam = () => {
             href="https://fantasy.premierleague.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-cyan-400 hover:text-cyan-300 underline"
+            className="text-teal-300 hover:text-teal-200 underline"
           >
             fantasy.premierleague.com
           </a>
@@ -118,7 +116,7 @@ const FormTeam = () => {
       </form>
       {errorMsg && (
         <div className="mt-6 animate-shake">
-          <div className="relative z-10 bg-red-950/50 backdrop-blur-sm border border-red-800/50 rounded-lg p-4 flex items-start gap-3">
+          <div className="relative z-10 bg-red-950/30 border border-red-700/40 rounded-lg p-4 flex items-start gap-3">
             <svg
               className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5"
               fill="none"

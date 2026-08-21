@@ -1,11 +1,21 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope, Fraunces } from "next/font/google";
 import Footer from "./components/Footer";
 import NavBar from "./components/Navbar";
 import { FplProvider } from "./providers/FplProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Turbo FPL",
@@ -31,9 +41,9 @@ export default function RootLayout({
           href="https://turbo-fpl.vercel.app/favicon.ico"
         ></link>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#12191d" />
       </head>
-      <body className={inter.className}>
+      <body className={`${manrope.variable} ${fraunces.variable}`}>
         <FplProvider>
           <NavBar />
           {children}

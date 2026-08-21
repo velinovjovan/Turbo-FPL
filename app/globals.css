@@ -1,20 +1,80 @@
-@import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --page-top: #151d21;
+  --page-bottom: #0d1215;
+  --surface: #1b252a;
+  --surface-2: #222f35;
+  --line: #31424a;
+  --text-main: #e7edf1;
+  --text-subtle: #a8b4bc;
+  --accent-teal: #6faea0;
+  --accent-blue: #6d9bc6;
+  --accent-amber: #d8af73;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  color: var(--text-main);
+  font-family: var(--font-body), sans-serif;
+  background:
+    radial-gradient(
+      circle at 15% -20%,
+      rgba(96, 148, 202, 0.16),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(64, 105, 170, 0.14),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(35, 62, 115, 0.12),
+      transparent 40%
+    ),
+    linear-gradient(360deg, #101d33 0%, #04070d 100%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), serif;
+  letter-spacing: 0.01em;
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding-top: 8.5rem;
+  padding-bottom: 5rem;
+}
+
+.page-inner {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.surface-card {
+  background: linear-gradient(
+    180deg,
+    rgba(27, 37, 42, 0.92),
+    rgba(24, 33, 38, 0.92)
+  );
+  border: 1px solid rgba(49, 66, 74, 0.9);
+  border-radius: 1rem;
 }
 
 main {

@@ -81,13 +81,13 @@ const PriceChanges = () => {
 
   if (isLoading || !bootstrap) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black flex items-center justify-center pt-24">
+      <div className="min-h-screen flex items-center justify-center pt-24">
         <div className="flex flex-col items-center justify-center">
           <div className="relative">
-            <div className="w-16 h-16 border-4 border-emerald-500/20 border-solid rounded-full"></div>
-            <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
+            <div className="w-16 h-16 border-4 border-slate-600/30 border-solid rounded-full"></div>
+            <div className="w-16 h-16 border-4 border-slate-300 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
           </div>
-          <p className="mt-6 text-lg font-semibold text-gray-300">
+          <p className="mt-6 text-lg font-semibold text-slate-300">
             Loading price projections...
           </p>
         </div>
@@ -95,39 +95,31 @@ const PriceChanges = () => {
     );
   }
 
+  const currentEvent = bootstrap?.events?.find((e) => e.is_current);
+  const nextEvent = bootstrap?.events?.find((e) => e.is_next);
+
+  const currentGw = currentEvent
+    ? currentEvent.id
+    : nextEvent
+      ? nextEvent.id - 1
+      : 38;
+
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden pt-24">
-      <div className="absolute top-40 left-10 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div
-        className="absolute top-60 right-10 w-96 h-96 bg-green-500/20 rounded-full blur-3xl animate-pulse"
-        style={{ animationDelay: "1s" }}
-      ></div>
-      <div
-        className="absolute bottom-40 left-1/3 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"
-        style={{ animationDelay: "2s" }}
-      ></div>
+    <div className="page-shell overflow-hidden pt-24">
       <div className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center mb-16">
-          <div className="inline-block mb-6">
-            <span className="text-sm uppercase tracking-widest text-emerald-400 font-semibold px-4 py-2 bg-emerald-500/10 backdrop-blur-sm border border-emerald-500/20 rounded-full">
-              Price Tracker
-            </span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 leading-tight">
             <span className="text-white">FPL </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-green-500 to-cyan-500">
-              Price Changes Predictor
-            </span>
+            <span className="text-emerald-300">Price Changes Predictor</span>
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light">
             In{" "}
-            <span className="text-emerald-400 font-semibold">
+            <span className="text-emerald-300 font-semibold">
               Fantasy Premier League
             </span>
             , player prices fluctuate based on transfer activity. Our{" "}
-            <span className="text-emerald-400 font-semibold">
+            <span className="text-emerald-300 font-semibold">
               Price Changes Predictor
             </span>{" "}
             provides live updates and projections on which players are likely to
@@ -135,10 +127,10 @@ const PriceChanges = () => {
           </p>
         </div>
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 mb-40">
-          <div className="group text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300">
-            <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-emerald-500/20 to-green-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <div className="group text-center p-6 surface-card hover:border-emerald-500/50 transition-all duration-300">
+            <div className="w-14 h-14 mx-auto mb-4 bg-emerald-900/35 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <svg
-                className="w-7 h-7 text-emerald-400"
+                className="w-7 h-7 text-emerald-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -154,15 +146,15 @@ const PriceChanges = () => {
             <h3 className="text-white font-semibold text-lg mb-2">
               Price Rises
             </h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Track players likely to increase in value
             </p>
           </div>
 
-          <div className="group text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-red-500/30 transition-all duration-300">
-            <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <div className="group text-center p-6 surface-card hover:border-rose-500/50 transition-all duration-300">
+            <div className="w-14 h-14 mx-auto mb-4 bg-rose-900/30 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <svg
-                className="w-7 h-7 text-red-400"
+                className="w-7 h-7 text-rose-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -178,15 +170,15 @@ const PriceChanges = () => {
             <h3 className="text-white font-semibold text-lg mb-2">
               Price Falls
             </h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Monitor players decreasing in price
             </p>
           </div>
 
-          <div className="group text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300">
-            <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <div className="group text-center p-6 surface-card hover:border-sky-500/50 transition-all duration-300">
+            <div className="w-14 h-14 mx-auto mb-4 bg-sky-900/35 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <svg
-                className="w-7 h-7 text-cyan-400"
+                className="w-7 h-7 text-sky-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -202,12 +194,45 @@ const PriceChanges = () => {
             <h3 className="text-white font-semibold text-lg mb-2">
               Live Updates
             </h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Real-time predictions and alerts
             </p>
           </div>
         </div>
-        <TablePrice sortedPlayers={sortedPlayers} />
+
+        {currentGw >= 5 ? (
+          <TablePrice sortedPlayers={sortedPlayers} />
+        ) : (
+          <div className="max-w-4xl mx-auto surface-card p-10 sm:p-14 text-center border border-emerald-500/20 rounded-2xl shadow-lg backdrop-blur-sm bg-slate-900/40">
+            <div className="w-20 h-20 mx-auto mb-6 bg-emerald-900/30 rounded-2xl flex items-center justify-center border border-emerald-500/30">
+              <svg
+                className="w-10 h-10 text-emerald-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-4">
+              Predictions Unlock After Gameweek 5
+            </h3>
+            <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              Our model requires sufficient transfer activity and performance
+              data from the start of the season to establish reliable trends and
+              provide accurate price change projections.
+            </p>
+            <p className="text-emerald-300 font-medium mt-6 text-sm sm:text-base bg-emerald-900/20 inline-block px-4 py-2 rounded-lg border border-emerald-500/20">
+              Currently at Gameweek{" "}
+              {currentGw > 0 ? currentGw : "0 (Pre-season)"}. Check back soon!
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

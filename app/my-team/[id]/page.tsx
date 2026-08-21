@@ -21,7 +21,12 @@ const TeamView = ({ params }: { params: { id: string } }) => {
     error: bootstrapError,
   } = useFplBootstrap();
 
-  if (Number(TeamId) > 12360377 || Number(TeamId) < 1) notFound();
+  if (
+    bootstrap &&
+    (Number(TeamId) > bootstrap.total_players || Number(TeamId) < 1)
+  ) {
+    notFound();
+  }
 
   const [data, setData] = useState<FplTeamSummary>({
     name: "",
@@ -70,45 +75,51 @@ const TeamView = ({ params }: { params: { id: string } }) => {
       try {
         setIsLoading(true);
         const timeStamp = new Date().getTime();
+
         const res = await fetch(
           `${baseLink}/api/entry/${TeamId}/?_=${timeStamp}`,
         );
-
-        if (!res.ok) {
-          throw new Error(`Error fetching team data: ${res.status}`);
-        }
-
+        if (!res.ok) throw new Error(`Error fetching team data: ${res.status}`);
         const data = await res.json();
         setData(data);
 
         const res1 = await fetch(
           `${baseLink}/api/entry/${TeamId}/event/${data.current_event}/picks/?_=${timeStamp}`,
         );
-
-        if (!res1.ok) {
+        if (!res1.ok)
           throw new Error(`Error fetching event picks: ${res1.status}`);
-        }
-
         const data1 = await res1.json();
         if (data1.active_chip == "bboost") {
           setNum(16);
         }
         setDataCurr(data1);
 
-        const res2 = await fetch(
-          `${baseLink}/api/entry/${TeamId}/event/${
-            data.current_event - 1
-          }/picks/?_=${timeStamp}`,
-        );
+        let data2 = {
+          picks: [{ element: 1, multiplier: 1, position: 1 }],
+          active_chip: "",
+          automatic_subs: [],
+          entry_history: {
+            total_points: 0,
+            value: 0,
+            overall_rank: 0,
+            rank: 0,
+          },
+        };
 
-        if (!res2.ok) {
-          throw new Error(`Error fetching event picks: ${res2.status}`);
+        if (data.current_event > 1) {
+          const res2 = await fetch(
+            `${baseLink}/api/entry/${TeamId}/event/${data.current_event - 1}/picks/?_=${timeStamp}`,
+          );
+
+          if (res2.ok) {
+            data2 = await res2.json();
+          }
         }
-
-        const data2 = await res2.json();
         setDataPrev(data2);
+
         setIsLoading(false);
       } catch (error) {
+        console.error("TeamView fetch error:", error);
         setError(true);
         setIsLoading(false);
       }
@@ -163,13 +174,13 @@ const TeamView = ({ params }: { params: { id: string } }) => {
 
   if (isLoading || isBootstrapLoading || !bootstrap) {
     return (
-      <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black flex items-center justify-center">
+      <div className="relative min-h-screen flex items-center justify-center">
         <div className="flex flex-col justify-center items-center">
           <div className="relative">
-            <div className="w-16 h-16 border-4 border-cyan-500/20 border-solid rounded-full"></div>
-            <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
+            <div className="w-16 h-16 border-4 border-slate-600/30 border-solid rounded-full"></div>
+            <div className="w-16 h-16 border-4 border-slate-300 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
           </div>
-          <p className="mt-6 text-lg font-semibold text-gray-300">
+          <p className="mt-6 text-lg font-semibold text-slate-300">
             Loading team data...
           </p>
         </div>
@@ -178,17 +189,13 @@ const TeamView = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black pt-56 pb-20 px-4 sm:px-6 lg:px-8">
-      <div
-        className="absolute bottom-40 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"
-        style={{ animationDelay: "1s" }}
-      ></div>
+    <div className="relative min-h-screen pt-56 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="relative z-10 max-w-[1600px] mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 mb-4 inline-block">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-teal-200 mb-4 inline-block">
             {data.name}
           </h1>
-          <p className="text-lg sm:text-xl text-gray-300">
+          <p className="text-lg sm:text-xl text-slate-300">
             Manager:{" "}
             <span className="font-semibold">
               {data.player_first_name} {data.player_last_name}
@@ -198,11 +205,11 @@ const TeamView = ({ params }: { params: { id: string } }) => {
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="text-center">
-              <div className="inline-flex items-center gap-4 bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-2xl px-8 py-5">
-                <span className="text-xl sm:text-2xl font-semibold text-gray-300">
+              <div className="inline-flex items-center gap-4 bg-slate-900/70 border border-slate-600 rounded-2xl px-8 py-5">
+                <span className="text-xl sm:text-2xl font-semibold text-slate-300">
                   GW{data.current_event} Points:
                 </span>
-                <span className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                <span className="text-3xl sm:text-4xl font-bold text-sky-300">
                   {totalPoints}
                 </span>
               </div>
@@ -309,7 +316,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                 ))}
               </div>
             </div>
-            <div className="bg-slate-900/30 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+            <div className="surface-card p-6">
               <h3 className="text-lg font-semibold text-gray-300 mb-4 text-center">
                 Substitutes
               </h3>
@@ -343,7 +350,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
               active_chip={dataCurr.active_chip}
               id={Number(params.id)}
             />
-            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8">
+            <div className="surface-card p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 text-center">
                 Statistics
               </h2>
@@ -405,13 +412,13 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                 </div>
                 <div className="flex justify-between items-center text-base sm:text-lg">
                   <span className="text-gray-400">Overall Points:</span>
-                  <span className="font-bold text-cyan-400">
+                  <span className="font-bold text-sky-300">
                     {formatNumber(dataCurr.entry_history.total_points)}
                   </span>
                 </div>
                 <div className="flex justify-between items-center text-base sm:text-lg">
                   <span className="text-gray-400">Gameweek Points:</span>
-                  <span className="font-bold text-cyan-400">
+                  <span className="font-bold text-sky-300">
                     {formatNumber(totalPoints)}
                   </span>
                 </div>
@@ -429,9 +436,9 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                 </div>
               </div>
             </div>
-            <div className="relative bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8">
+            <div className="relative surface-card p-8">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                <span className="bg-gradient-to-r from-red-600 to-orange-600 text-white text-sm font-bold px-6 py-2 rounded-full shadow-lg">
+                <span className="bg-amber-700 text-white text-sm font-bold px-6 py-2 rounded-full">
                   COMING SOON
                 </span>
               </div>
@@ -447,7 +454,7 @@ const TeamView = ({ params }: { params: { id: string } }) => {
                 </div>
                 <div className="flex justify-between items-center text-base sm:text-lg">
                   <span className="text-gray-400">Projected Points:</span>
-                  <span className="font-bold text-cyan-400">
+                  <span className="font-bold text-sky-300">
                     {formatNumber(totalPoints)}
                   </span>
                 </div>

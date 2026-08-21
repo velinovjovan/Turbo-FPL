@@ -124,15 +124,13 @@ const TableOpta = ({ Data }: TableOptaProps) => {
 
   return (
     <div className="relative w-full px-4 py-8">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
               Player Statistics
             </h2>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Click column headers to sort • {sortedPlayers.length} players
               found
             </p>
@@ -140,15 +138,14 @@ const TableOpta = ({ Data }: TableOptaProps) => {
           <div className="w-full sm:w-auto">
             <label
               htmlFor="results"
-              className="block mb-2 text-sm font-semibold text-gray-300"
+              className="block mb-2 text-sm font-semibold text-slate-300"
             >
               Show Results
             </label>
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur opacity-0 group-focus-within:opacity-100 transition-opacity duration-300"></div>
               <select
                 id="results"
-                className="relative z-10 bg-slate-900/50 backdrop-blur-sm border border-slate-700 text-white text-sm rounded-lg focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 block w-full sm:w-40 px-4 py-2.5 transition-all duration-300 cursor-pointer hover:border-cyan-500/50"
+                className="relative z-10 bg-slate-900/70 border border-slate-600 text-white text-sm rounded-lg focus:ring-2 focus:ring-slate-400/40 focus:border-slate-400 block w-full sm:w-40 px-4 py-2.5 transition-all duration-300 cursor-pointer hover:border-slate-500"
                 value={num === 1000 ? "All" : num}
                 onChange={handleChange}
               >
@@ -168,18 +165,18 @@ const TableOpta = ({ Data }: TableOptaProps) => {
             </div>
           </div>
         </div>
-        <div className="bg-slate-900/30 backdrop-blur-sm border border-slate-800/50 rounded-xl overflow-hidden shadow-2xl">
+        <div className="surface-card overflow-hidden">
           <div className="overflow-x-auto">
             <div className="max-h-[600px] overflow-y-auto">
-              <table className="w-full text-sm text-gray-400 border-collapse">
-                <thead className="text-xs uppercase bg-slate-900/80 backdrop-blur-sm text-gray-300 sticky top-0 z-20">
+              <table className="w-full text-sm text-slate-300 border-collapse">
+                <thead className="text-xs bg-slate-900/90 text-slate-300 sticky top-0 z-20">
                   <tr>
                     <th
                       onClick={() => handleSort("web_name")}
                       scope="col"
                       className={`px-4 py-4 text-left cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "web_name"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Player Name"
@@ -194,7 +191,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "now_cost"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Cost"
@@ -209,7 +206,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "starts"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Games Started"
@@ -224,7 +221,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "minutes"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Minutes Played"
@@ -239,7 +236,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "expected_goals"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Expected Goals"
@@ -254,7 +251,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "goals_scored"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Goals Scored"
@@ -268,7 +265,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "expected_assists"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Expected Assists"
@@ -283,7 +280,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "assists"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Assists"
@@ -299,7 +296,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "expected_goal_involvements_per_90"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Expected Goal Involvement per 90"
@@ -314,7 +311,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "goal_involvements_per_90"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Goal Involvement per 90"
@@ -329,7 +326,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "expected_goal_involvements"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Expected Goal Involvement"
@@ -344,7 +341,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "goal_involvements"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Goal Involvement"
@@ -359,7 +356,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "bps"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Bonus Points System (FPL)"
@@ -374,7 +371,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "bonus"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Bonus Points"
@@ -388,7 +385,7 @@ const TableOpta = ({ Data }: TableOptaProps) => {
                       scope="col"
                       className={`px-4 py-4 cursor-pointer hover:bg-slate-800/50 transition-colors duration-200 whitespace-nowrap ${
                         sortAttribute === "total_points"
-                          ? "text-cyan-400 border-b-2 border-cyan-400"
+                          ? "text-sky-300 border-b-2 border-sky-300"
                           : "border-b-2 border-transparent"
                       }`}
                       title="Points Scored"

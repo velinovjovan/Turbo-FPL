@@ -9,14 +9,13 @@ const CardSection = () => {
         parag="Get powerful insights with Opta-powered stats. Track player performance, key metrics, and trends to make data-driven decisions that give your FPL advantage."
       >
         <div className="relative">
-          <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full"></div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-12 text-cyan-400 relative z-10"
+            className="size-12 text-sky-300 relative z-10"
           >
             <path
               strokeLinecap="round"
@@ -31,14 +30,13 @@ const CardSection = () => {
         parag="Never miss a price rise or fall again! Monitor real-time price movements and get alerts to maximize your squad value and transfer budget."
       >
         <div className="relative">
-          <div className="absolute inset-0 bg-emerald-500/20 blur-2xl rounded-full"></div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-12 text-emerald-400 relative z-10"
+            className="size-12 text-emerald-300 relative z-10"
           >
             <path
               strokeLinecap="round"
@@ -53,14 +51,13 @@ const CardSection = () => {
         parag="Our AI model analyzes fixtures, form, and stats to give you tailored recommendations for the highest-scoring lineup every week."
       >
         <div className="relative">
-          <div className="absolute inset-0 bg-purple-500/20 blur-2xl rounded-full"></div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-12 text-purple-400 relative z-10"
+            className="size-12 text-violet-300 relative z-10"
           >
             <path
               strokeLinecap="round"

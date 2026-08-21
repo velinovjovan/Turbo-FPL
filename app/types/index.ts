@@ -2,6 +2,7 @@ import type React from "react";
 
 export type FplBootstrapEvent = {
   is_current: boolean;
+  is_next: boolean;
   id: number;
 };
 

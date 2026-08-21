@@ -21,13 +21,13 @@ const TableComp = ({ player, index }: TableCompProps) => {
       <td className="px-4 py-3 text-center w-20">
         {Number(player.expected_goals).toFixed(2)}
       </td>
-      <td className="px-4 py-3 text-center font-semibold text-emerald-400 w-16">
+      <td className="px-4 py-3 text-center font-semibold text-emerald-300 w-16">
         {player.goals_scored}
       </td>
       <td className="px-4 py-3 text-center w-20">
         {Number(player.expected_assists).toFixed(2)}
       </td>
-      <td className="px-4 py-3 text-center font-semibold text-cyan-400 w-20">
+      <td className="px-4 py-3 text-center font-semibold text-sky-300 w-20">
         {player.assists}
       </td>
       <td className="px-4 py-3 text-center w-20">
@@ -45,12 +45,12 @@ const TableComp = ({ player, index }: TableCompProps) => {
       <td className="px-4 py-3 text-center w-20">
         {Number(player.expected_goal_involvements).toFixed(2)}
       </td>
-      <td className="px-4 py-3 text-center font-semibold text-purple-400 w-20">
+      <td className="px-4 py-3 text-center font-semibold text-violet-300 w-20">
         {Number(player.assists) + Number(player.goals_scored)}
       </td>
       <td className="px-4 py-3 text-center w-22">{player.bps}</td>
       <td className="px-4 py-3 text-center w-20">{player.bonus}</td>
-      <td className="px-4 py-3 text-center font-bold text-cyan-400 w-22">
+      <td className="px-4 py-3 text-center font-bold text-teal-200 w-22">
         {player.total_points}
       </td>
     </tr>

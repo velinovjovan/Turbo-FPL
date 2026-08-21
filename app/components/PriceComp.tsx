@@ -35,9 +35,7 @@ const PriceComp = ({ name, cost, progress, index }: PriceCompProps) => {
           >
             <div
               className={`h-6 rounded-full transition-all duration-500 flex items-center justify-center ${
-                isRise
-                  ? "bg-gradient-to-r from-emerald-600 to-emerald-500"
-                  : "bg-gradient-to-r from-red-600 to-red-500"
+                isRise ? "bg-emerald-600" : "bg-red-600"
               }`}
               style={{
                 width: `${progressWidth}%`,
@@ -94,10 +92,10 @@ const PriceComp = ({ name, cost, progress, index }: PriceCompProps) => {
         <span
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${
             absProgress > 90
-              ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
+              ? "bg-slate-700/80 text-slate-200 border border-slate-500"
               : absProgress < 50
-                ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                : "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                ? "bg-slate-700/80 text-slate-200 border border-slate-500"
+                : "bg-slate-700/80 text-slate-200 border border-slate-500"
           }`}
         >
           {absProgress > 90 && (

@@ -3,22 +3,15 @@ import FormTeam from "../components/FormTeam";
 
 const MyTeam = () => {
   return (
-    <div className="relative bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden pb-32 pt-10">
-      <div className="relative z-10 pt-32 sm:pt-40 px-4 sm:px-6 lg:px-8">
+    <div className="page-shell pb-32 pt-10">
+      <div className="page-inner pt-8 sm:pt-14 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 animate-fade-in">
-          <div className="inline-block mb-4">
-            <span className="text-sm uppercase tracking-widest text-cyan-400 font-semibold px-4 py-2 bg-cyan-500/10 backdrop-blur-sm border border-cyan-500/20 rounded-full">
-              My Team
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-4 leading-tight">
             <span className="text-white">View Your</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-              FPL Squad
-            </span>
+            <span className="text-emerald-300">FPL Squad</span>
           </h1>
-          <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-300 max-w-5xl mx-auto">
             Access detailed stats, player performance, and insights for your
             Fantasy Premier League team
           </p>
@@ -28,10 +21,10 @@ const MyTeam = () => {
           className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto animate-fade-in"
           style={{ animationDelay: "0.3s" }}
         >
-          <div className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300">
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg flex items-center justify-center">
+          <div className="text-center p-6 surface-card transition-all duration-300 hover:border-teal-500/50">
+            <div className="w-12 h-12 mx-auto mb-4 bg-teal-900/40 rounded-lg flex items-center justify-center">
               <svg
-                className="w-6 h-6 text-cyan-400"
+                className="w-6 h-6 text-teal-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -45,15 +38,15 @@ const MyTeam = () => {
               </svg>
             </div>
             <h3 className="text-white font-semibold mb-2">Live Stats</h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Real-time player performance data
             </p>
           </div>
 
-          <div className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300">
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500/20 to-green-500/20 rounded-lg flex items-center justify-center">
+          <div className="text-center p-6 surface-card transition-all duration-300 hover:border-emerald-500/50">
+            <div className="w-12 h-12 mx-auto mb-4 bg-emerald-900/40 rounded-lg flex items-center justify-center">
               <svg
-                className="w-6 h-6 text-emerald-400"
+                className="w-6 h-6 text-emerald-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -67,15 +60,15 @@ const MyTeam = () => {
               </svg>
             </div>
             <h3 className="text-white font-semibold mb-2">Team Value</h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Track your squad&apos;s total worth
             </p>
           </div>
 
-          <div className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300">
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center">
+          <div className="text-center p-6 surface-card transition-all duration-300 hover:border-violet-500/50">
+            <div className="w-12 h-12 mx-auto mb-4 bg-violet-900/35 rounded-lg flex items-center justify-center">
               <svg
-                className="w-6 h-6 text-purple-400"
+                className="w-6 h-6 text-violet-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -89,7 +82,7 @@ const MyTeam = () => {
               </svg>
             </div>
             <h3 className="text-white font-semibold mb-2">Smart Tips</h3>
-            <p className="text-sm text-gray-400">AI-powered recommendations</p>
+            <p className="text-sm text-slate-400">AI-powered recommendations</p>
           </div>
         </div>
       </div>

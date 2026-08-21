@@ -9,34 +9,32 @@ const TablePrice = ({ sortedPlayers }: TablePriceProps) => {
 
   return (
     <div className="relative w-full px-4 py-8">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
               Price Change Predictions
             </h2>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               {filteredPlayers.length} players tracked • Ownership &gt; 10%
             </p>
           </div>
           <div className="flex gap-4 text-sm">
-            <div className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+            <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/70 border border-slate-600 rounded-lg">
               <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
-              <span className="text-gray-300">Price Rise</span>
+              <span className="text-slate-300">Price Rise</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-lg">
+            <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/70 border border-slate-600 rounded-lg">
               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <span className="text-gray-300">Price Fall</span>
+              <span className="text-slate-300">Price Fall</span>
             </div>
           </div>
         </div>
-        <div className="bg-slate-900/30 backdrop-blur-sm border border-slate-800/50 rounded-xl overflow-hidden shadow-2xl">
+        <div className="surface-card overflow-hidden">
           <div className="overflow-x-auto">
             <div className="max-h-[600px] overflow-y-auto">
-              <table className="w-full text-sm text-gray-400 border-collapse">
-                <thead className="text-xs uppercase bg-slate-900/80 backdrop-blur-sm text-gray-400 sticky top-0 z-20">
+              <table className="w-full text-sm text-slate-300 border-collapse">
+                <thead className="text-xs bg-slate-900/90 text-slate-300 sticky top-0 z-20">
                   <tr>
                     <th
                       scope="col"

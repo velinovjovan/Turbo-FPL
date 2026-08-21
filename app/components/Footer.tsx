@@ -5,20 +5,18 @@ const year = date.getFullYear();
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-t from-slate-950 via-black to-slate-950 border-t border-slate-800/50">
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none"></div>
+    <footer className="relative border-t border-slate-700/70 bg-slate-950/90">
       <div className="relative max-w-screen-xl px-4 py-12 mx-auto space-y-8 sm:px-6 lg:px-8">
         <div className="flex justify-center gap-8">
           <a
             href="https://www.instagram.com/velinovjovan"
-            className="group relative text-gray-400 hover:text-cyan-400 transition-all duration-300"
+            className="group relative text-slate-400 hover:text-teal-300 transition-all duration-300"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Follow us on Instagram"
           >
-            <div className="absolute inset-0 bg-cyan-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
             <svg
-              className="w-6 h-6 relative z-10 transform group-hover:scale-110 transition-transform duration-300"
+              className="w-6 h-6 relative z-10 transform group-hover:scale-105 transition-transform duration-300"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 24 24"
@@ -33,14 +31,13 @@ const Footer = () => {
 
           <a
             href="https://www.linkedin.com/in/jovan-velinov-473b84356/"
-            className="group relative text-gray-400 hover:text-cyan-400 transition-all duration-300"
+            className="group relative text-slate-400 hover:text-sky-300 transition-all duration-300"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Connect with us on LinkedIn"
           >
-            <div className="absolute inset-0 bg-cyan-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
             <svg
-              className="w-6 h-6 relative z-10 transform group-hover:scale-110 transition-transform duration-300"
+              className="w-6 h-6 relative z-10 transform group-hover:scale-105 transition-transform duration-300"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 24 24"
@@ -51,14 +48,13 @@ const Footer = () => {
 
           <a
             href="https://github.com/velinovjovan"
-            className="group relative text-gray-400 hover:text-cyan-400 transition-all duration-300"
+            className="group relative text-slate-400 hover:text-emerald-300 transition-all duration-300"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View our GitHub"
           >
-            <div className="absolute inset-0 bg-cyan-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
             <svg
-              className="w-6 h-6 relative z-10 transform group-hover:scale-110 transition-transform duration-300"
+              className="w-6 h-6 relative z-10 transform group-hover:scale-105 transition-transform duration-300"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 24 24"
@@ -72,12 +68,11 @@ const Footer = () => {
           </a>
         </div>
         <div className="relative h-px w-full max-w-md mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent blur-sm"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-600 to-transparent"></div>
         </div>
-        <p className="text-sm leading-6 text-center text-gray-500 font-light tracking-wide">
-          © {year} <span className="text-gray-400 font-medium">Turbo FPL</span>.
-          All rights reserved.
+        <p className="text-sm leading-6 text-center text-slate-500 font-light tracking-wide">
+          © {year} <span className="text-slate-300 font-medium">Turbo FPL</span>
+          . All rights reserved.
         </p>
       </div>
     </footer>

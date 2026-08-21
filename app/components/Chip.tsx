@@ -5,15 +5,15 @@ import type { ChipProps } from "../types";
 const Chip = ({ name, code, status, isActive = false }: ChipProps) => {
   const getStatusStyles = () => {
     if (isActive) {
-      return "bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-cyan-400 shadow-lg shadow-cyan-500/50";
+      return "bg-slate-600 text-white border-slate-400";
     }
     if (status === "Used") {
-      return "bg-gradient-to-r from-red-600 to-red-500 text-white border-red-400 shadow-lg shadow-red-500/30";
+      return "bg-slate-700 text-slate-200 border-slate-500";
     }
     if (status === "Unavailable") {
       return "bg-slate-700 text-gray-400 border-slate-600";
     }
-    return "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white border-emerald-400 shadow-lg shadow-emerald-500/30";
+    return "bg-emerald-700 text-white border-emerald-500";
   };
 
   const getStatusIcon = () => {
@@ -75,17 +75,17 @@ const Chip = ({ name, code, status, isActive = false }: ChipProps) => {
 
   return (
     <div
-      className={`group relative bg-slate-800/50 backdrop-blur-sm border rounded-xl p-6 transition-all duration-300 hover:scale-105 ${
+      className={`group relative bg-slate-800/70 border rounded-xl p-6 transition-all duration-300 hover:scale-105 ${
         isActive
-          ? "border-cyan-500 shadow-lg shadow-cyan-500/30"
+          ? "border-slate-400"
           : status === "Used"
             ? "border-slate-700"
-            : "border-emerald-500/30 hover:border-emerald-500/50"
+            : "border-emerald-600/50 hover:border-emerald-500"
       }`}
     >
       {isActive && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-          <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
+          <div className="bg-slate-600 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
             <svg
               className="w-3 h-3 animate-pulse"
               fill="currentColor"
@@ -98,15 +98,6 @@ const Chip = ({ name, code, status, isActive = false }: ChipProps) => {
         </div>
       )}
       <div className="relative mb-4 flex justify-center">
-        <div
-          className={`absolute inset-0 blur-2xl rounded-full transition-opacity duration-300 ${
-            isActive
-              ? "bg-cyan-500/50 opacity-100"
-              : status === "Available"
-                ? "bg-emerald-500/30 opacity-0 group-hover:opacity-100"
-                : "opacity-0"
-          }`}
-        ></div>
         <Image
           className={`relative z-10 w-16 md:w-20 lg:w-24 h-auto transition-all duration-300 ${
             isActive

@@ -111,15 +111,13 @@ const TablePredict = ({ Data }: TablePredictProps) => {
 
   return (
     <div className="relative w-full px-4 py-8">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
               AI Predictions
             </h2>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Machine learning powered point forecasts • GW{" "}
               {gw > 37 ? "" : gw + 1}
             </p>
@@ -128,15 +126,14 @@ const TablePredict = ({ Data }: TablePredictProps) => {
           <div className="w-full sm:w-auto">
             <label
               htmlFor="results"
-              className="block mb-2 text-sm font-semibold text-gray-300"
+              className="block mb-2 text-sm font-semibold text-slate-300"
             >
               Show Results
             </label>
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg blur opacity-0 group-focus-within:opacity-100 transition-opacity duration-300"></div>
               <select
                 id="results"
-                className="relative z-10 bg-slate-900/50 backdrop-blur-sm border border-slate-700 text-white text-sm rounded-lg focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 block w-full sm:w-40 px-4 py-2.5 transition-all duration-300 cursor-pointer hover:border-purple-500/50"
+                className="relative z-10 bg-slate-900/70 border border-slate-600 text-white text-sm rounded-lg focus:ring-2 focus:ring-slate-400/40 focus:border-slate-400 block w-full sm:w-40 px-4 py-2.5 transition-all duration-300 cursor-pointer hover:border-slate-500"
                 value={num === 1000 ? "All" : num}
                 onChange={handleChange}
               >
@@ -160,20 +157,20 @@ const TablePredict = ({ Data }: TablePredictProps) => {
         {isLoading ? (
           <div className="flex flex-col justify-center items-center py-32">
             <div className="relative">
-              <div className="w-16 h-16 border-4 border-purple-500/20 border-solid rounded-full"></div>
-              <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
+              <div className="w-16 h-16 border-4 border-slate-600/30 border-solid rounded-full"></div>
+              <div className="w-16 h-16 border-4 border-slate-300 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
             </div>
-            <p className="mt-6 text-lg font-semibold text-gray-300">
+            <p className="mt-6 text-lg font-semibold text-slate-300">
               Running AI predictions...
             </p>
           </div>
         ) : (
           <>
-            <div className="bg-slate-900/30 backdrop-blur-sm border border-slate-800/50 rounded-xl overflow-hidden shadow-2xl">
+            <div className="surface-card overflow-hidden">
               <div className="overflow-x-auto">
                 <div className="max-h-[600px] overflow-y-auto">
-                  <table className="w-full text-sm text-gray-400 border-collapse">
-                    <thead className="text-xs uppercase bg-slate-900/80 backdrop-blur-sm text-gray-400 sticky top-0 z-20">
+                  <table className="w-full text-sm text-slate-300 border-collapse">
+                    <thead className="text-xs bg-slate-900/90 text-slate-300 sticky top-0 z-20">
                       <tr>
                         <th
                           scope="col"
@@ -196,7 +193,7 @@ const TablePredict = ({ Data }: TablePredictProps) => {
                         >
                           <div className="flex items-center justify-center gap-3">
                             <span>Predicted Points</span>
-                            <span className="bg-purple-500/20 border border-purple-500/30 text-purple-400 px-3 py-1 rounded-lg text-xs font-bold">
+                            <span className="bg-violet-900/40 border border-violet-500/60 text-violet-200 px-3 py-1 rounded-lg text-xs font-bold">
                               GW {gw > 37 ? "" : gw + 1}
                             </span>
                           </div>
@@ -225,7 +222,6 @@ const TablePredict = ({ Data }: TablePredictProps) => {
                               return (
                                 <div className="flex flex-col items-center justify-center gap-3">
                                   <div className="relative group">
-                                    <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
                                     <Image
                                       className="relative z-10 w-20 h-24 object-contain"
                                       unoptimized
@@ -258,7 +254,7 @@ const TablePredict = ({ Data }: TablePredictProps) => {
                                 )}
                                 duration={2}
                                 decimals={2}
-                                className="text-2xl font-bold text-white px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg"
+                                className="text-2xl font-bold text-white px-8 py-3 bg-violet-700 rounded-xl"
                               />
                             </div>
                           </td>

@@ -13,13 +13,13 @@ const OptaStats = () => {
 
   if (isLoading || !bootstrap) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black flex items-center justify-center pt-24">
+      <div className="min-h-screen flex items-center justify-center pt-24">
         <div className="flex flex-col items-center justify-center">
           <div className="relative">
-            <div className="w-16 h-16 border-4 border-cyan-500/20 border-solid rounded-full"></div>
-            <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
+            <div className="w-16 h-16 border-4 border-slate-600/30 border-solid rounded-full"></div>
+            <div className="w-16 h-16 border-4 border-slate-300 border-t-transparent border-solid rounded-full animate-spin absolute top-0 left-0"></div>
           </div>
-          <p className="mt-6 text-lg font-semibold text-gray-300">
+          <p className="mt-6 text-lg font-semibold text-slate-300">
             Loading Opta stats...
           </p>
         </div>
@@ -28,32 +28,15 @@ const OptaStats = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden pt-24">
-      <div className="absolute top-40 left-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div
-        className="absolute top-60 right-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"
-        style={{ animationDelay: "1s" }}
-      ></div>
-      <div
-        className="absolute bottom-40 left-1/3 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
-        style={{ animationDelay: "2s" }}
-      ></div>
+    <div className="page-shell overflow-hidden pt-24">
       <div className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center mb-16">
-          <div className="inline-block mb-6">
-            <span className="text-sm uppercase tracking-widest text-cyan-400 font-semibold px-4 py-2 bg-cyan-500/10 backdrop-blur-sm border border-cyan-500/20 rounded-full">
-              Opta Stats
-            </span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 leading-tight">
             <span className="text-white">Player Stats: </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-              Opta & FPL Performance
-            </span>
+            <span className="text-sky-300">Opta & FPL Performance</span>
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light">
             Your one-stop source for detailed insights into player performance
             across the Premier League. Find comprehensive breakdowns powered by
             Opta data for tactical insights, performance predictions, and
@@ -61,10 +44,10 @@ const OptaStats = () => {
           </p>
         </div>
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
-          <div className="group text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300">
-            <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <div className="group text-center p-6 surface-card hover:border-sky-500/50 transition-all duration-300">
+            <div className="w-14 h-14 mx-auto mb-4 bg-sky-900/35 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <svg
-                className="w-7 h-7 text-cyan-400"
+                className="w-7 h-7 text-sky-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -80,14 +63,14 @@ const OptaStats = () => {
             <h3 className="text-white font-semibold text-lg mb-2">
               Opta Powered
             </h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Industry-leading data and analytics
             </p>
           </div>
-          <div className="group text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300">
-            <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-emerald-500/20 to-green-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <div className="group text-center p-6 surface-card hover:border-emerald-500/50 transition-all duration-300">
+            <div className="w-14 h-14 mx-auto mb-4 bg-emerald-900/35 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <svg
-                className="w-7 h-7 text-emerald-400"
+                className="w-7 h-7 text-emerald-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -103,13 +86,13 @@ const OptaStats = () => {
             <h3 className="text-white font-semibold text-lg mb-2">
               Real-Time Updates
             </h3>
-            <p className="text-sm text-gray-400">Latest performance metrics</p>
+            <p className="text-sm text-slate-400">Latest performance metrics</p>
           </div>
 
-          <div className="group text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300">
-            <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <div className="group text-center p-6 surface-card hover:border-amber-500/50 transition-all duration-300">
+            <div className="w-14 h-14 mx-auto mb-4 bg-amber-900/30 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <svg
-                className="w-7 h-7 text-purple-400"
+                className="w-7 h-7 text-amber-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -125,7 +108,7 @@ const OptaStats = () => {
             <h3 className="text-white font-semibold text-lg mb-2">
               Advanced Metrics
             </h3>
-            <p className="text-sm text-gray-400">xG, xA, and BPS</p>
+            <p className="text-sm text-slate-400">xG, xA, and BPS</p>
           </div>
         </div>
         <TableOpta Data={bootstrap} />
