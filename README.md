@@ -6,11 +6,10 @@
 
 ## Features
 
-- **Landing Page** – A sleek introduction to Turbo FPL with quick navigation to all tools.
 - **My Team** – View your squad, monitor live points, and analyze player performance.
 - **Opta Stats** – Browse detailed stats for all 800+ Premier League players using real FPL data.
 - **Price Predictor** – Predict upcoming price changes based on player performance trends.
-- **Points Predictor** – AI-powered prediction model built with `RandomForestRegressor` to estimate future FPL points using key features like goals, assists, minutes, and fixture difficulty.
+- **Points Predictor** – AI-powered prediction model built with `RandomForestRegressor` to estimate future FPL points.
 
 ---
 
