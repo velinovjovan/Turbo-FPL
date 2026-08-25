@@ -49,9 +49,9 @@
 
 ## Future Plans
 
-- 🧩 Add captaincy and transfer recommendations
-- 📈 Implement visual charts for player projections
-- 🧠 Upgrade ML model with ensemble and xG-based prediction improvements
-- 💬 Build a live chat and community section for FPL discussions
+- Add captaincy and transfer recommendations
+- Implement visual charts for player projections
+- Upgrade ML model with ensemble and xG-based prediction improvements
+- Build a live chat and community section for FPL discussions
 
 ---
